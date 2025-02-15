@@ -43,7 +43,7 @@ Start the server
 
 ## Tech Stack
 
-**Backend:** Node, Express, Prisma, ZOD, JWT, Bcrypt
+**Backend:** Node, Express, Prisma, ZOD, JWT, Bcrypt & typescript
 
 
 
@@ -51,5 +51,5 @@ Start the server
 
 Here are some related projects
 
-**to:** [Backend](https://github.com/farisan/FE-EDII-TechincalTest.git)
+**to:** [Frontend](https://github.com/farisan/FE-EDII-TechincalTest.git)
 
