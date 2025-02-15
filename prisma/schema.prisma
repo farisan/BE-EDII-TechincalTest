@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Biodata {
+  id            String    @id @unique @default(uuid())
+  email         String    @unique
+  password      String
+  posisi        String?
+  username      String?
+  role          String    @default("karyawan")
+  noKtp         String?   @unique @map("no_ktp")
+  noTelp        String?   @map("no_telp")
+  noDarurat     String?   @map("no_darurat")
+  ttl           String?
+  jenisKelamin  String?   @map("jenis_kelamin")
+  agama         String?
+  golonganDarah String?   @map("golongan_darah")
+  status        String?
+  alamatKtp     String?   @map("alamat_ktp")
+  alamatTinggal String?   @map("alamat_tinggal")
+  skill         String?
+  ketersediaan  String?
+  expectSalary  Int?      @map("expect_salary")
+  isActive      Boolean   @default(true)
+  createdAt     DateTime? @default(now())
+
+  pendidikan Pendidikan[]
+  pelatihan  Pelatihan[]
+  pekerjaan  Pekerjaan[]
+
+  @@map("biodata")
+}
+
+model Pendidikan {
+  id         String  @id @unique @default(uuid())
+  biodataId  String
+  gelar      String?
+  nama       String?
+  jurusan    String?
+  ipk        Float?
+  tahunLulus Int?    @map("tahun_lulus")
+  biodata    Biodata @relation(fields: [biodataId], references: [id])
+
+  @@map("pendidikan")
+}
+
+model Pelatihan {
+  id         String  @id @unique @default(uuid())
+  biodataId  String
+  nama       String?
+  sertifikat String?
+  tahun      Int?
+  biodata    Biodata @relation(fields: [biodataId], references: [id])
+
+  @@map("pelatihan")
+}
+
+model Pekerjaan {
+  id         String  @id @unique @default(uuid())
+  biodataId  String
+  nama       String?
+  posisi     String?
+  pendapatan Int?
+  tahun      Int?
+  biodata    Biodata @relation(fields: [biodataId], references: [id])
+
+  @@map("pekerjaan")
+}
