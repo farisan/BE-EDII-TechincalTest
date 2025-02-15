@@ -51,5 +51,5 @@ Start the server
 
 Here are some related projects
 
-**to:** [Frontend](https://github.com/farisan/FE-EDII-TechincalTest.git)
+**to:** [Backend](https://github.com/farisan/FE-EDII-TechincalTest.git)
 
