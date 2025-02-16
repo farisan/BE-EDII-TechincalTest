@@ -45,6 +45,67 @@ Start the server
 
 **Backend:** Node, Express, Prisma, ZOD, JWT, Bcrypt & typescript
 
+## Database
+
+**DB:** Postgresql & neon
+
+Berikut adalah skema database dalam format dbDiagram.io:
+
+```sql
+Table biodata {
+  id             uuid    [primary key, unique, default: `uuid()`]
+  email          varchar [unique]
+  password       varchar
+  posisi         varchar
+  username       varchar
+  role           varchar [default: "karyawan"]
+  no_ktp         varchar [unique]
+  no_telp        varchar
+  no_darurat     varchar
+  ttl            varchar
+  jenis_kelamin  varchar
+  agama          varchar
+  golongan_darah varchar
+  status         varchar
+  alamat_ktp     varchar
+  alamat_tinggal varchar
+  skill          varchar
+  ketersediaan   varchar
+  expect_salary  int
+  is_active      boolean [default: true]
+  created_at     timestamp [default: `now()`]
+}
+
+Table pendidikan {
+  id          uuid    [primary key, unique, default: `uuid()`]
+  biodata_id  uuid    [not null, ref: > biodata.id]
+  gelar       varchar
+  nama        varchar
+  jurusan     varchar
+  ipk         float
+  tahun_lulus int
+}
+
+Table pelatihan {
+  id          uuid    [primary key, unique, default: `uuid()`]
+  biodata_id  uuid    [not null, ref: > biodata.id]
+  nama        varchar
+  sertifikat  varchar
+  tahun       int
+}
+
+Table pekerjaan {
+  id          uuid    [primary key, unique, default: `uuid()`]
+  biodata_id  uuid    [not null, ref: > biodata.id]
+  nama        varchar
+  posisi      varchar
+  pendapatan  int
+  tahun       int
+}
+```
+Berikut adalah gambar dari hasil relasi database:
+
+![ERD](./ERD.PNG)
 
 
 ## Related
